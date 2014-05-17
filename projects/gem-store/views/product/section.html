@@ -1,6 +1,6 @@
 <!-- initialize the tab value in the current scope !-->
 <!-- ng-init="tab = 1" is moved to PanelController !-->
-<section ng-controller="PanelController as panel">
+<section>
     <ul class="nav nav-pills">
         <!-- ng-class allow us to set a proper class when a condizion is true !-->
         <li ng-class="{ active: panel.isSelected(1) }">
@@ -56,7 +56,7 @@
                 </div>
                 <!-- With this div we can debug our form !-->
                 <!-- Valid is a boolean-built in attribute from AngularJS, there's some magic here lol !-->
-                <div>newReview is {{ newReview.$valid }}</div>
+                <!-- <div>newReview is {{ newReview.$valid }}</div> !-->
                 <button type="submit" class="btn btn-success">Review the product</button>
             </form>
             </div>
