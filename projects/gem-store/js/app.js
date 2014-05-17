@@ -19,6 +19,18 @@
             return this.tab === checkTab;
         };
     });
+    // Controller for our reviews form
+    app.controller('ReviewController', function() {
+        // Initialize the review variable used in view
+        this.review = {};
+        // Save the brand new review
+        this.addReview = function(product) {
+            // With some angularJS magic this push to the currenct product
+            product.reviews.push(this.review);
+            // reset the form
+            this.review = {};
+        }
+    })
 
     // Our gems
     var gems = [
@@ -30,6 +42,13 @@
             soldOut : false,
             images : [
                 'assets/dodecahedron.png'
+            ],
+            reviews : [
+                {
+                    stars : 5,
+                    body : "This gem is freaking awesome",
+                    author : "Claudio Ludovico"
+                }
             ]
         },
         {
@@ -40,6 +59,13 @@
             soldOut : false,
             images : [
                 'assets/pentagonal.jpg'
+            ],
+            reviews : [
+                {
+                    stars : 5,
+                    body : "This gem is freaking awesome",
+                    author : "Claudio Ludovico"
+                }
             ]
         }
     ]
