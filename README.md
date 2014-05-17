@@ -24,7 +24,7 @@ Just because. There're a lot of frameworks out there but AngularJs inspired me f
 
 ## Can you contribute ? ##
 
-** Of course you can **
+**Of course you can**
 
 First clone the repo and to whatever you want, then submit a pull request or an issue when your code is ready.
 
