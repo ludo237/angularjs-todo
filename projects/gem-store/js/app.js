@@ -1,5 +1,30 @@
 (function(){
     var app = angular.module('store', [ ]);
+    /*
+    * Custom Directives
+    */
+    app.directive('productTitle', function() {
+        return {
+            // Directive Definition Object
+            restrict : 'E', // Directive type, e stands form Element
+            templateUrl : 'views/product/title.html' // Actual template
+        };
+    });
+
+    app.directive('productImage', function() {
+        return {
+            restrict : 'E',
+            templateUrl : 'views/product/image.html'
+        };
+    });
+
+    app.directive('productSection', function() {
+        return {
+            restrict : 'E',
+            templateUrl : 'views/product/section.html'
+        };
+    });
+
 
     // Store controller
     app.controller('StoreController', function() {
