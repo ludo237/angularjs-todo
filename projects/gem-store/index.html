@@ -1,105 +1,43 @@
 <!DOCTYPE html>
 <html ng-app="store">
-<head>
-    <title>Code School Gem Store</title>
-    <!-- Latest compiled and minified CSS !-->
-    <link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap.min.css">
-    <!-- Optional theme !-->
-    <link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap-theme.min.css">
-    <!-- Custom page theme !-->
-    <style type="text/css">
-     /* AngularJs default classes for validation */
-     .ng-invalid.ng-dirty {
-        border-color: #FA787E;  /* Red color if the form is invalid and has some text */
-     }
-     .ng-valid.ng-dirty {
-        border-color: #78FA89; /* Green color if the form is valid and has some text */
-     }
-    </style>
-    <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/angularjs/1.3.0-beta.8/angular.js"></script>
-    <script type="text/javascript" src="js/app.js"></script>
-</head>
-<body>
-    <div class="container">
-        <h1>{{ "Hello " + " to AngularGemStore" }}</h1>
-        <!-- StoreController binded to our HTML using an alias. The scope or StoreController is limited to our div !-->
-        <div class="row" ng-controller="StoreController as store">
-            <!-- By usgin ng-repeat we ca display multiple items !-->
-            <!-- ng-hide will fire when the condition is true !-->
-            <!-- we can user the "limitTo" and "orderBy" on our collection, pretty awesome!!! !-->
-            <div class="col-xs-12 col-sm-6 col-md-5 col-lg-5" ng-repeat="product in store.products | limitTo:5 | orderBy:'price'" ng-hide="product.soldOut">
-                <!-- currency is a filter that can localized a price for the client !-->
-                <h3>{{ product.name }} <small class="pull-right">{{ product.price | currency }}</small></h3>
-                <img ng-src="{{ product.images[0] }}" width="160" height="160" class="thumbnail" />
-                <!-- initialize the tab value in the current scope !-->
-                <!-- ng-init="tab = 1" is moved to PanelController !-->
-                <section ng-controller="PanelController as panel">
-                    <ul class="nav nav-pills">
-                        <!-- ng-class allow us to set a proper class when a condizion is true !-->
-                        <li ng-class="{ active: panel.isSelected(1) }">
-                            <!-- Using the directive ng-click we can assing a tab to out link !-->
-                            <a href="#description" ng-click="panel.selectTab(1)">Description</a>
-                        </li>
-                        <li ng-class="{ active: panel.isSelected(2) }">
-                            <a href="#specifications" ng-click="panel.selectTab(2)">Specifications</a>
-                        </li>
-                        <li ng-class="{ active: panel.isSelected(3) }">
-                            <a href="#reviews" ng-click="panel.selectTab(3)">Reviews</a>
-                        </li>
-                    </ul>
-                    <div class="panel" ng-show="panel.isSelected(1)">
-                        <h4>Description</h4>
-                        <blockquote>{{ product.description }}</blockquote>
-                    </div>
-                    <div class="panel" ng-show="panel.isSelected(2)">
-                        <h4>Specifications</h4>
-                        <p> {{ product.description }}</p>
-                    </div>
-                    <div class="panel" ng-show="panel.isSelected(3)">
-                        <h4>Reviews</h4>
-                        <blockquote ng-repeat="review in product.reviews">
-                            <strong>{{ review.stars }}</strong>
-                            {{ review.body }}
-                            <footer><cite>{{ review.author }}</cite></footer>
-                        </blockquote>
-                        <div class="panel">
-                            <!-- We need a form to store new reviews, now we try to use standard AngularJS aliasing for controller !-->
-                            <!-- ng-submit act like onsubmit="" old and fancy javascript function... !-->
-                            <!-- novalidate tells to the browser to turn off the default HTML5 Validation system !-->
-                            <form role="form" name="newReview" id="newReview" ng-controller="ReviewController as reviewCtrl" ng-submit="newReview.$valid && reviewCtrl.addReview(product)" novalidate>
-                                <!-- This will work as preview for the brand new review.
-                                        NOTE: we're using the same directive "review" used before !-->
-                                <blockquote>
-                                    <strong>{{ reviewCtrl.review.stars }}</strong>
-                                    {{ reviewCtrl.review.body }}
-                                    <footer><cite>{{ reviewCtrl.review.author }}</cite></footer>
-                                </blockquote>
-                                <div class="form-group">
-                                    <!-- To make the like preview we need to BIND the directive to our inputs, to do so simply using ng-model="directive-name" !-->
-                                    <select name="stars" id="stars" class="form-control" ng-model="reviewCtrl.review.stars" ng-options="stars for stars in [5,4,3,2,1]" required>
-                                        <option disabled selected>Select a Star</option>
-                                    </select>
-                                </div>
-                                <div class="form-group">
-                                    <textarea name="body" id="body" class="form-control" ng-model="reviewCtrl.review.body" placeholder="Your review text" required></textarea>
-                                </div>
-                                <div class="form-group">
-                                    <label>By:</label>
-                                    <input type="email" name="author" id="author" class="form-control" ng-model="reviewCtrl.review.author" placeholder="Your E-mail" required/>
-                                </div>
-                                <!-- With this div we can debug our form !-->
-                                <!-- Valid is a boolean-built in attribute from AngularJS, there's some magic here lol !-->
-                                <div>newReview is {{ newReview.$valid }}</div>
-                                <button type="submit" class="btn btn-success">Review the product</button>
-                            </form>
-                            </div>
-                    </div>
-                </section>
-                <!-- To display an image we have to use ng-src !-->
-                <!-- Display this button only if the purchase product is avaiable !-->
-                <button class="btn btn-success" ng-show="product.canPurchase"> Add to card </button>
+    <head>
+        <title>Code School Gem Store</title>
+        <!-- Latest compiled and minified CSS !-->
+        <link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap.min.css">
+        <!-- Optional theme !-->
+        <link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap-theme.min.css">
+        <!-- Custom page theme !-->
+        <style type="text/css">
+         /* AngularJs default classes for validation */
+         .ng-invalid.ng-dirty {
+            border-color: #FA787E;  /* Red color if the form is invalid and has some text */
+         }
+         .ng-valid.ng-dirty {
+            border-color: #78FA89; /* Green color if the form is valid and has some text */
+         }
+        </style>
+        <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/angularjs/1.3.0-beta.8/angular.js"></script>
+        <script type="text/javascript" src="js/app.js"></script>
+    </head>
+    <body>
+        <div class="container">
+            <h1>{{ "Hello " + " to AngularGemStore" }}</h1>
+            <!-- StoreController binded to our HTML using an alias. The scope or StoreController is limited to our div !-->
+            <div class="row" ng-controller="StoreController as store">
+                <!-- By usgin ng-repeat we ca display multiple items !-->
+                <!-- ng-hide will fire when the condition is true !-->
+                <!-- we can user the "limitTo" and "orderBy" on our collection, pretty awesome!!! !-->
+                <div class="col-xs-12 col-sm-6 col-md-5 col-lg-5" ng-repeat="product in store.products | limitTo:5 | orderBy:'price'" ng-hide="product.soldOut">
+                    <!-- To keep the code clean we're using custom directives for our product
+                            Custom tags MUST HAVE THE CLOSING TAG, self-closing tags is not suggested !-->
+                    <product-title></product-title>
+                    <product-image></product-image>
+                    <product-section></product-section>
+                    <!-- To display an image we have to use ng-src !-->
+                    <!-- Display this button only if the purchase product is avaiable !-->
+                    <button class="btn btn-success" ng-show="product.canPurchase"> Add to card </button>
+                </div>
             </div>
         </div>
-    </div>
-</body>
+    </body>
 </html>
