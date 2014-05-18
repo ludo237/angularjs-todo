@@ -13,11 +13,16 @@
         };
     });
 
-    app.controller('UserController', function() {
-        var user = this;
-        user.data = {
-            name : null,
-            enable : true
+    app.controller('UserController', function($scope) {
+        $scope.data = {
+            name : 'guest_1234',
+            enable : false
+        };
+        $scope.updateUser = function() {
+            // Update the user's name
+            $scope.data.name = this.data.name;
+            // Enable the user
+            $scope.data.enable = true;
         };
     });
 
