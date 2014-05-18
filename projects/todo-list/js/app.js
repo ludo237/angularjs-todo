@@ -2,6 +2,16 @@
     // Init the module
     var app = angular.module('todo', []);
 
+    app.controller('TestController', function() {
+        this.supportStorage = function() {
+            try {
+                return 'localStorage' in window && window['localStorage'] !== null;
+            } catch (e) {
+                return false;
+            }
+        };
+    });
+
     /**
     * TodoController
     * @dependencies  $http
