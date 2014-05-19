@@ -48,10 +48,10 @@
                 </div>
                 <div class="col-lg-12">
                     <br />
-                    <form name="taskForm" id="taskForm" class="form-inline" role="form" ng-show="getAction(1)" ng-submit="taskForm.$valid &amp;&amp; newTask()" novalidate>
+                    <form name="taskForm" id="taskForm" class="form-inline" role="form" ng-show="getAction(1)" ng-submit="taskForm.$valid &amp;&amp; newTask(task)" novalidate>
                         <div class="form-group">
                             <label class="sr-only" for="task">Email address</label>
-                            <input type="text" name="description" id="description" class="form-control input-sm" placeholder="Your task" required autocomplete="off" ng-model="task.description">
+                            <input type="text" name="description" id="description" class="form-control input-sm" placeholder="Your task description" required autocomplete="off" ng-model="task.description">
                         </div>
                         <button type="submit" class="btn btn-success btn-sm" ng-show="taskForm.$valid"><i class="fa fa-save"></i>&nbsp;Save TODO</button>
                     </form>

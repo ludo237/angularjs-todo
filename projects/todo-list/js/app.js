@@ -48,14 +48,6 @@
             localStorage['todo.user.name'] = this.data.name;
             localStorage['todo.user.enable'] = true;
         };
-        // Set the current action
-        $scope.setAction = function(action) {
-            $scope.action = action;
-        };
-        // Check the current action
-        $scope.getAction = function(action) {
-            return  $scope.action === action;
-        };
         // Delete all todos
         $scope.cleanUp = function() {
             localStorage['todo.tasks'] = [];
@@ -63,8 +55,20 @@
             alert("Todos deleted!");
         };
         // Save current Task
-        $scope.newTask = function() {
-            var newTask = { 'description': $scope.task.description, 'done': false, 'created_at': Date.now(), 'updated_at': Date.now() };
+        $scope.newTask = function(task) {
+            var newTask = { 'description': this.task.description, 'done': false, 'created_at': Date.now(), 'updated_at': Date.now() };
+            tasks.push(newTask);
+            console.log(tasks);
+            localStorage.setItem('todo.tasks', JSON.stringify(tasks));
+            this.task = [];
+        };
+        // Set the current action
+        $scope.setAction = function(action) {
+            $scope.action = action;
+        };
+        // Check the current action
+        $scope.getAction = function(action) {
+            return  $scope.action === action;
         };
     });
 
@@ -77,11 +81,13 @@
         if(localStorage['todo.tasks']) {
             console.log("Resumed your tasks");
             tasks.push(localStorage['todo.tasks']);
+            localStorage['todo.tasks'] =[];
         } else {
             console.log("Init new tasks object");
-            localStorage['todo.tasks'] = JSON.stringify( [] );
-            tasks = localStorage['todo.tasks'];
+            localStorage['todo.tasks'] = [];
+            tasks = [];
         }
+        console.log(tasks);
         // Grab all the tasks
         $scope.tasks = JSON.parse(tasks);
     });
