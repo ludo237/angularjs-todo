@@ -50,7 +50,7 @@
                     <br />
                     <form name="taskForm" id="taskForm" class="form-inline" role="form" ng-show="getAction(1)" ng-submit="taskForm.$valid &amp;&amp; newTask(task)" novalidate>
                         <div class="form-group">
-                            <label class="sr-only" for="task">Email address</label>
+                            <label class="sr-only" for="task">Your task description</label>
                             <input type="text" name="description" id="description" class="form-control input-sm" placeholder="Your task description" required autocomplete="off" ng-model="task.description">
                         </div>
                         <button type="submit" class="btn btn-success btn-sm" ng-show="taskForm.$valid"><i class="fa fa-save"></i>&nbsp;Save TODO</button>
@@ -71,10 +71,7 @@
                             <tbody>
                                 <tr ng-repeat="task in tasks track by $index">
                                     <td>{{ $index + 1 }}</td>
-                                    <td>
-                                        <i class="fa fa-check-square-o" ng-show="task.done"></i>
-                                        <i class="fa fa-square-o" ng-hide="task.done"></i>
-                                    </td>
+                                    <td><input type="checkbox" ng-checked="task.done" ng-click="toggle($index)"></td>
                                     <td>{{ task.description }}</td>
                                     <td>{{ task.created_at | date }}</td>
                                     <td>{{ task.updated_at | date }}</td>

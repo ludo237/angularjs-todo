@@ -35,7 +35,7 @@
             }
         }  else {
              $scope.data = {
-                name : 'guest_1234',
+                name : 'guest_' + Math.floor(Math.random() * (Math.floor(Math.random() * 100))) + 1,
                 enable : false
             };
         }
@@ -50,7 +50,7 @@
         };
         // Delete all todos
         $scope.cleanUp = function() {
-            localStorage['todo.tasks'] = [];
+            localStorage.removeItem('todo.tasks')
             tasks = [];
             alert("Todos deleted!");
         };
@@ -74,28 +74,28 @@
 
     /**
     * TodoController
-    * @Handler the todo tab
+    * @description Handler the todo tab
     **/
     app.controller('TodoController', function($scope) {
         // Initialize the empty array for tasks
         if(localStorage['todo.tasks']) {
-            console.log("Resumed your tasks");
-            console.log("Registered tasks on localStorage:");
-            console.log(localStorage['todo.tasks']);
+            // Resuming your tasks regitered on localstorage
             var ts = JSON.parse(localStorage['todo.tasks']);
-            console.log("Updating tasks var:");
+            // Updating global tasks variable
             tasks.push(ts);
             tasks = tasks[0];
-            console.log(tasks);
         } else {
-            console.log("Init new tasks object");
+            // Init new localstorage Object and tasks global var
             localStorage['todo.tasks'] = [];
             tasks = [];
         }
-        // Grab all the tasks
+        // Grab all the tasks put them in the scope
         $scope.tasks = tasks;
-        console.log("Scope now has your tasks:");
-        console.log($scope.tasks);
+        // Toggle the task
+        $scope.toggle = function(index) {
+            (tasks[index].done == true) ? tasks[index].done = false : tasks[index].done = true;
+            localStorage.setItem('todo.tasks', JSON.stringify(tasks));
+        };
     });
 
 })();
