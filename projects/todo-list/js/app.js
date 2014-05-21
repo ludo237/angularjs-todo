@@ -58,7 +58,6 @@
         $scope.newTask = function(task) {
             var newTask = { 'description': this.task.description, 'done': false, 'created_at': Date.now(), 'updated_at': Date.now() };
             tasks.push(newTask);
-            console.log(tasks);
             localStorage.setItem('todo.tasks', JSON.stringify(tasks));
             this.task = [];
         };
