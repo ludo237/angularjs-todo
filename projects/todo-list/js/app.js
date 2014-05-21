@@ -80,17 +80,22 @@
         // Initialize the empty array for tasks
         if(localStorage['todo.tasks']) {
             console.log("Resumed your tasks");
+            console.log("Registered tasks on localStorage:");
+            console.log(localStorage['todo.tasks']);
             var ts = JSON.parse(localStorage['todo.tasks']);
+            console.log("Updating tasks var:");
             tasks.push(ts);
             tasks = tasks[0];
+            console.log(tasks);
         } else {
             console.log("Init new tasks object");
             localStorage['todo.tasks'] = [];
             tasks = [];
         }
-        console.log(tasks);
         // Grab all the tasks
         $scope.tasks = tasks;
+        console.log("Scope now has your tasks:");
+        console.log($scope.tasks);
     });
 
 })();
