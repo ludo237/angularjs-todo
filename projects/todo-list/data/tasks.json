@@ -1,9 +1,0 @@
-[
-    {
-        "id" : 1,
-        "done" : true,
-        "description" : "Build the first version of TODO list",
-        "created_at" : "2014-05-17 15:43:16",
-        "updated_at" : "2014-05-18 11:23:06"
-    }
-]

@@ -80,8 +80,9 @@
         // Initialize the empty array for tasks
         if(localStorage['todo.tasks']) {
             console.log("Resumed your tasks");
-            tasks.push(localStorage['todo.tasks']);
-            localStorage['todo.tasks'] =[];
+            var ts = JSON.parse(localStorage['todo.tasks']);
+            tasks.push(ts);
+            tasks = tasks[0];
         } else {
             console.log("Init new tasks object");
             localStorage['todo.tasks'] = [];
@@ -89,7 +90,7 @@
         }
         console.log(tasks);
         // Grab all the tasks
-        $scope.tasks = JSON.parse(tasks);
+        $scope.tasks = tasks;
     });
 
 })();
