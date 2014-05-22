@@ -94,17 +94,21 @@
                             <thead>
                                 <th>ID</th>
                                 <th>Is done?</th>
+                                <th>Is important?</th>
                                 <th>Description</th>
                                 <th>Date added</th>
                                 <th>Date updated</th>
+                                <th></th>
                             </thead>
                             <tbody>
-                                <tr ng-repeat="task in tasks track by $index">
+                                <tr ng-repeat="task in tasks track by $index" ng-class="{ success : task.done, danger : task.important }">
                                     <td>{{ $index + 1 }}</td>
-                                    <td><input type="checkbox" ng-checked="task.done" ng-click="toggle($index)"></td>
+                                    <td><input type="checkbox" ng-checked="task.done" ng-click="toggleDone($index)"></td>
+                                    <td><input type="checkbox" ng-checked="task.important" ng-click="toggleImportant($index)"></td>
                                     <td>{{ task.description }}</td>
                                     <td>{{ task.created_at | date }}</td>
                                     <td>{{ task.updated_at | date }}</td>
+                                    <td><a href="#delete" ng-click="delete($index)" title="delete ToDo"><i class="fa fa-fw fa-trash-o"></i></a></td>
                                 </tr>
                             </tbody>
                         </table>
