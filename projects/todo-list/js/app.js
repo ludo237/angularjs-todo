@@ -1,7 +1,7 @@
 (function(){
     'use strict';
     // Init the module
-    var app = angular.module('todo', []);
+    var app = angular.module('todo', ['todo.directives']);
 
     // Global tasks
     var tasks = [];
