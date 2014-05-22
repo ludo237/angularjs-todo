@@ -1,11 +1,11 @@
-AngularJS Playground
+AngularJS To-Do List
 ===
 
 Welcome fellow developer.
 
-This repository contains a lot of open source projects built with AngularJS, a full-stack awesome Javascript framework.
+This repository contains an application built with AngularJS, a full-stack awesome Javascript framework.
 
-You can browse all the project by clicking on `projects` folder. Every project has a unique name, a sort of, in order to understand what's the content of it.
+You can browse all the project by clicking on `app` folder. Every file has a unique name, a sort of, in order to understand what's the content of it.
 
 ## Why this project ? ##
 
