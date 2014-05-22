@@ -24,14 +24,14 @@
     * UserController
     * @description Handle the basic function for the user
     **/
-    app.controller('UserController', function($scope) {
+    app.controller('UserController', function($scope, $window) {
         // Actions that can be done by the user
         $scope.action = 0; // None taken 1 for add todo 2 for delete all
         // Initialize the user data
-        if( localStorage['todo.user.enable'] == "true") {
+        if( $window.localStorage['todo.user.enable'] == "true") {
             $scope.data = {
-                name : localStorage['todo.user.name'],
-                enable : localStorage['todo.user.enable']
+                name : $window.localStorage['todo.user.name'],
+                enable : $window.localStorage['todo.user.enable']
             }
         }  else {
              $scope.data = {
@@ -45,27 +45,27 @@
             // Enable the user
             $scope.data.enable = true;
             // Update localStorage
-            localStorage['todo.user.name'] = this.data.name;
-            localStorage['todo.user.enable'] = true;
+            $window.localStorage['todo.user.name'] = this.data.name;
+            $window.localStorage['todo.user.enable'] = true;
         };
         // Delete all todos
         $scope.cleanUp = function() {
-            localStorage.removeItem('todo.tasks')
+            $window.localStorage.removeItem('todo.tasks')
             tasks = [];
-            alert("Todos deleted!");
+            $window.alert("Todos deleted!");
         };
         // Save current Task
         $scope.newTask = function(task) {
             var newTask = { 'description': this.task.description, 'done': false, 'created_at': Date.now(), 'updated_at': Date.now() };
             tasks.push(newTask);
-            localStorage.setItem('todo.tasks', JSON.stringify(tasks));
+            $window.localStorage.setItem('todo.tasks', JSON.stringify(tasks));
             this.task = [];
         };
-        // Set the current action
+        // Set the current user's action
         $scope.setAction = function(action) {
             $scope.action = action;
         };
-        // Check the current action
+        // Check the current user's action
         $scope.getAction = function(action) {
             return  $scope.action === action;
         };
@@ -75,25 +75,26 @@
     * TodoController
     * @description Handler the todo tab
     **/
-    app.controller('TodoController', function($scope) {
+    app.controller('TodoController', function($scope, $window) {
         // Initialize the empty array for tasks
-        if(localStorage['todo.tasks']) {
-            // Resuming your tasks regitered on localstorage
-            var ts = JSON.parse(localStorage['todo.tasks']);
+        if($window.localStorage['todo.tasks']) {
+            // Resuming your tasks regitered on $window.localstorage
+            var ts = JSON.parse($window.localStorage['todo.tasks']);
             // Updating global tasks variable
             tasks.push(ts);
             tasks = tasks[0];
         } else {
-            // Init new localstorage Object and tasks global var
-            localStorage['todo.tasks'] = [];
+            // Init new $window.localstorage Object and tasks global var
+            $window.localStorage['todo.tasks'] = [];
             tasks = [];
         }
         // Grab all the tasks put them in the scope
         $scope.tasks = tasks;
         // Toggle the task
         $scope.toggle = function(index) {
-            (tasks[index].done == true) ? tasks[index].done = false : tasks[index].done = true;
-            localStorage.setItem('todo.tasks', JSON.stringify(tasks));
+            tasks[index].done = !tasks[index].done;
+            //(tasks[index].done == true) ? tasks[index].done = false : tasks[index].done = true;
+            $window.localStorage.setItem('todo.tasks', JSON.stringify(tasks));
         };
     });
 
