@@ -56,7 +56,7 @@
         };
         // Save current Task
         $scope.newTask = function(task) {
-            var newTask = { 'description': this.task.description, 'done': false, 'created_at': Date.now(), 'updated_at': Date.now() };
+            var newTask = { 'description': this.task.description, 'done': false, 'important': false, 'created_at': Date.now(), 'updated_at': Date.now() };
             tasks.push(newTask);
             $window.localStorage.setItem('todo.tasks', JSON.stringify(tasks));
             this.task = [];
@@ -91,10 +91,26 @@
         // Grab all the tasks put them in the scope
         $scope.tasks = tasks;
         // Toggle the task
-        $scope.toggle = function(index) {
+        $scope.toggleDone = function(index) {
             tasks[index].done = !tasks[index].done;
+            tasks[index].important = false;
+            tasks[index].updated_at = Date.now();
             //(tasks[index].done == true) ? tasks[index].done = false : tasks[index].done = true;
             $window.localStorage.setItem('todo.tasks', JSON.stringify(tasks));
+        };
+        // Very very very similar to the "done" toggle
+        $scope.toggleImportant = function(index) {
+            tasks[index].important = !tasks[index].important;
+            tasks[index].done = false;
+            tasks[index].updated_at = Date.now();
+            $window.localStorage.setItem('todo.tasks', JSON.stringify(tasks));
+        };
+        // Delete single task
+        $scope.delete = function(index) {
+            if($window.confirm("Are your sure?")) {
+                tasks.splice(index,1);
+                $window.localStorage.setItem('todo.tasks', JSON.stringify(tasks));
+            }
         };
     });
 
