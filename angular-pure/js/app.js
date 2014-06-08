@@ -1,12 +1,7 @@
 (function(){
     'use strict';
     // Init the module
-    var app = angular.module('todo', []);
-
-    app.config(function($interpolateProvider) {
-      $interpolateProvider.startSymbol('[[');
-      $interpolateProvider.endSymbol(']]');
-    });
+    var app = angular.module('todo', ['todo.directives']);
 
     // Global tasks
     var tasks = [];
