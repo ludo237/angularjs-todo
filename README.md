@@ -9,6 +9,8 @@ You can browse all the project by clicking on `app` folder. Every file has a uni
 
 ## Why this project ? ##
 
+**This project is no longer maintan**
+
 I'd to improve myself, and so you should (LoL). For most of my career as a javascript font-end developer, I relied on the jQuery library, which is awesome by the way, however, I was never fully satisfied.
 
 I noticed this thing especially with the increasing difficulty of the projects, jQuery became almost a forced solution, a patch to restore my limited knowledge of Javascript, I admit.
